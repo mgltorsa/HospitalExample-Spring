@@ -76,7 +76,7 @@ public class AppointmentController {
     @GetMapping(value = "/edit_appointment")
     public String editAppointment(Model model, @RequestParam Long id) {
         Appointment found = appointmentRepository.findById(id).get();
-        if(found==null){
+        if (found == null) {
             model.addAttribute("errMsg", "No se encontró cita con id - " + id);
             return "index";
         }
@@ -113,7 +113,7 @@ public class AppointmentController {
     @GetMapping(value = "/remove_appointment")
     public String removeAppointment(Model model, @RequestParam Long id) {
 
-        if(!appointmentRepository.existsById(id)){
+        if (!appointmentRepository.existsById(id)) {
             model.addAttribute("errMsg", "No se encontró cita con id - " + id);
             return "index";
         }
@@ -143,7 +143,11 @@ public class AppointmentController {
 
             @Override
             public int compare(Appointment o1, Appointment o2) {
-                return o1.getDate().compareTo(o2.getDate());
+                int dateComparisson = o1.getDate().compareTo(o2.getDate());
+                if (dateComparisson == 0) {
+                    return o1.getTime().compareTo(o2.getTime());
+                }
+                return dateComparisson;
             }
         };
 
