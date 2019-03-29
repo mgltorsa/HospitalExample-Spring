@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="appointment_list.css">
+    <title>Citas</title>
+</head>
+
+<body>
+
+    <table class="table table-striped table-borderless">
+        <thead class="thead-dark">
+            <th>Id - (editar)</th>
+            <th>Patient</th>
+            <th>Medic</th>
+            <th>Date</th>
+            <th></th>
+        </thead>
+        <tbody>
+            <tr th:each="appointment : ${appointments}">
+                <td>
+                    <a th:href="*{'/edit_appointment?id='+appointment.id}" th:text="*{appointment.id}"></a>
+                </td>
+                <td th:text="${''+appointment.patient.id+' - '+appointment.patient.name}"></td>
+                <td th:text="${''+appointment.medic.id+' - '+appointment.medic.name}"></td>
+                <td th:text="${''+#dates.format(appointment.date, 'dd-MMM-yyyy')+' : '+appointment.time}"></td>
+
+
+                <td>
+                    <a class="button table-striped" th:href="*{'/remove_appointment?id='+appointment.id}"> Borrar</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <footer>
+        <a class="p-4" th:href="@{/}">Index</a>
+        <a class="p-4" th:href="@{/create_appointment}">Crear cita</a>
+    </footer>
+
+</body>
+
+</html>

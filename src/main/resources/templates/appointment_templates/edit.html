@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <title>Creating appointment</title>
+</head>
+
+<body>
+    <div class="container" style="margin-left: 40%">
+        <h2>Editar cita</h2>
+        <form th:action="@{/edit_appointment}" method="POST" th:object="${appointment}">
+            <label for="patient">Paciente <span th:if="${#fields.hasErrors('patient')}" th:errors="*{patient}"></span></label>
+            <br>
+            <select name="patient" th:if="${patients!=null and not #arrays.isEmpty(patients)}">
+                <option th:field="${appointment.patient}" th:each=" patient : ${patients}" th:value="${patient.id}" th:text="${patient.name}"></option>
+            </select>
+            <br>
+            <br>
+            <label for="medic">Medico <span th:if="${#fields.hasErrors('medic')}" th:errors="*{medic}"></span></label>
+            <br>
+            <select name="medic" th:if="${medics!=null and not #arrays.isEmpty(medics)}">
+                <option th:field="${appointment.medic}" th:each=" medic : ${medics}" th:value="${medic.id}" th:text="${medic.name}"></option>
+            </select>
+            <br>
+            <br>
+            <label for="date">Date <span th:if="${#fields.hasErrors('date')}" th:errors="*{date}"></span> </label>
+            <br>
+            <input type="date" name="date" th:field="${appointment.date}">
+            <br>
+            <br>
+            <label for="time">Hora de entrada <span th:if="${#fields.hasErrors('time')}" th:errors="*{time}"></span></label>
+            <br>
+            <input type="time" name="time" th:field="${appointment.time}">
+            <br>
+            <br>
+            <br>
+            <input type="submit">
+        </form>
+
+        <br>
+        <br>
+        <footer>
+            <a class="p-4" th:href="@{/}">Index</a>
+        </footer>
+    </div>
+</body>
+
+</html>

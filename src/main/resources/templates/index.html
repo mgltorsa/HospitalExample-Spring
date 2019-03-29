@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="index.css">
+    <meta charset="UTF-8">
+    <title>Index</title>
+</head>
+
+<body>
+
+    <div class="div-container">
+        <div class="header">
+            <h3>Welcome</h3>
+        </div>
+        <div class="message">
+            <h3 th:if="${errMsg!=null}" th:text="${errMsg}"></h3>
+        </div>
+        <div class="center">
+            <a class="p-4" th:href="@{/users}"> Lista de usuarios</a>
+            <a class="p-4" th:href="@{/appointments}"> Lista de citas</a>
+            <a class="p-4" th:href="@{/create}"> Crear usuario</a>
+            <a class="p-4" th:href="@{/create_appointment}"> Crear cita</a>
+        </div>
+    </div>
+
+    </div>
+
+</body>
+
+</html>

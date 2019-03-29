@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset=" UTF-8 ">
+    <meta name="viewport " content="width=device-width, initial-scale=1.0 ">
+    <meta http-equiv="X-UA-Compatible " content="ie=edge ">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="users_list.css">
+    <title>Lista de usuarios</title>
+</head>
+
+<body>
+    <div style="float: left;">
+        <div>
+            <h2>Lista de usuarios</h2>
+        </div>
+        <div th:if="${errMsg!=null}">
+            <p th:if="${errMsg!=null}" th:text="${errMsg}"></p>
+        </div>
+
+    </div>
+    <table class="table table-striped table-borderless">
+        <thead class="thead-dark">
+            <th>Id</th>
+            <th>Nombre</th>
+            <th>Email</th>
+            <th>Birth Date</th>
+            <th>Genre</th>
+            <th>UserType</th>
+            <th></th>
+            <th></th>
+        </thead>
+        <tbody>
+            <tr th:each="user : ${users}">
+                <td>
+                    <a th:href="*{'/edit?id='+user.id}" th:text="*{user.id}"></a>
+                </td>
+                <td th:text="*{user.name}"></td>
+                <td th:text="*{user.email}"></td>
+                <td th:text="*{#dates.format(user.birthdate, 'dd/MMM/yyyy')}"></td>
+                <td th:text="*{user.genre}"></td>
+                <td th:text="*{user.type}"></td>
+                <td>
+                    <a th:href="*{'/appointmentByUser?id='+user.id}">Ver mis citas</a>
+                </td>
+
+                <td>
+                    <a class="button table-striped" th:href="*{'/remove?id='+user.id}"> Borrar</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <footer>
+        <a class="p-4" th:href="@{/}">Index</a>
+        <a class="p-4" th:href="@{/create}">Crear usuario</a>
+    </footer>
+</body>
+
+</html>
